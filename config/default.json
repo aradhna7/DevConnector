@@ -1,3 +1,6 @@
 {
-  "mongoURI": "mongodb+srv://aradhna123:ara123@devconnector.gyeuk.mongodb.net/test?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://aradhna123:ara123@devconnector.gyeuk.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken",
+  "githubClientId" : "299cea3eeb8dde301717",
+  "githubSecret" : "3305cb9a0fedcf9034cbe59164787b52cf092a81"
 }
