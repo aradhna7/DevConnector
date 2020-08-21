@@ -5,6 +5,7 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 const {check, validationResult, checkSchema} = require('express-validator/check');
 
 // @route   GET api/profile/me
@@ -38,7 +39,7 @@ router.post('/', [ auth ,[
 
     const errors = validationResult(req);
     if(!errors.isEmpty()){
-        res.status(400).json({ errors : errors.array() });
+        return res.status(400).json({ errors : errors.array() });
     };
 
     const {company, website, location, bio,status, skills, githubusername, youtube,facebook, twitter, instagram,linkedin} = req.body;
@@ -135,8 +136,13 @@ router.get('/user/:userid', async(req, res) => {
 // @access  PRIVATE
 router.delete('/', auth, async(req, res) => {
   try{
+    //remove user post
+    await Post.deleteMany({user: req.user.id})
+
+    //remove profile
     await Profile.findOneAndRemove({ user: req.user.id});
 
+    //remove user
     await User.findOneAndRemove({ _id: req.user.id});
 
     res.json({msg: 'User deleted'});
