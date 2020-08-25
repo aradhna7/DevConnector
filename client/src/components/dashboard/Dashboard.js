@@ -1,7 +1,7 @@
 import React, {useEffect, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { getCurrentProfile, deleteEducation, deleteAccount } from '../../actions/profile';
+import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 import {Spinner} from'../layout/Spinner';
 import { Link } from 'react-router-dom';
 import DashboardActions from './DashboardActions';
@@ -12,7 +12,7 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth:{ user }, profile:{ 
 
     useEffect(()=>{
         getCurrentProfile();
-    }, []);
+    }, [getCurrentProfile]);
 
     return loading && profile===null ? <Spinner /> : <Fragment>
         <h1 class="large text-primary">Dashboard</h1>
